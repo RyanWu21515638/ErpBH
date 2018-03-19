@@ -1,0 +1,14 @@
+-customer
+-design
+-login
+    --login.js 用户登陆退出控制器
+-product
+    --flowService.js service,所有http请求 
+    --mechine.js 机台增删改查Controller
+    --product.js 生产看板、任务分配、切、冲、焊、分Controller
+    --workChart.js
+-storage
+    --storage.js
+-system
+    --user.js 用户增删改查Controller
+app.js 程序入口，定义页面路由(ui.rooter)，全局变量
