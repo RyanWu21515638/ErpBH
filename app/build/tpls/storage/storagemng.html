@@ -1,0 +1,49 @@
+<div class="col-md-2 col-lg-1">
+    <ul class="nav nav-list">
+        <li class="active"><a href=""><i class="icon-dashboard"></i>仓储管理</a></li>
+        <li>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-tags"></i>物料管理<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a ui-sref="main.storagemng.storageinfo">
+                        <i class="icon-double-angle-right"></i>
+                        型材库存管理
+                    </a>
+                </li>
+
+                <li>
+                    <a ui-sref="main.storagemng.storageinfo">
+                        <i class="icon-double-angle-right"></i>
+                        配件库存管理
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li><a href="" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="icon-suitcase"></i>成品管理<b class="caret"></b>
+        </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a ui-sref="main.storagemng.formworkdone">
+                        <i class="icon-double-angle-right"></i>
+                        卡板管理
+                    </a>
+                </li>
+
+                <li>
+                    <a ui-sref="main.storagemng.storageinfo">
+                        <i class="icon-double-angle-right"></i>
+                        旧版库存管理
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div id="tree1" class="tree tree-selectable">
+    </div>
+</div>
+<div class="col-md-10 col-lg-11">
+    <div ui-view></div>
+</div>

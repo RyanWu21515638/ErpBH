@@ -1,0 +1,61 @@
+<div class="main-container">
+    <div class="main-container-inner" ng-controller="productCtrl">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a>设计修改需要重新打包的模板清单</a>
+                </li>
+            </ul><!-- .breadcrumb -->
+
+        </div><!-- breadcrumbs-->
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    <!--<i class="icon-spinner icon-spin orange bigger-125"></i>-->
+                    设计修改需要重新打包的模板清单
+                </h1>
+            </div><!-- /.page-header -->
+            <form class="form-horizontal" role="form">
+
+                <div class="form-group">
+                    <div class="col-sm-5" >
+                        <button class="btn btn-success " style="width: 220px" ng-mousedown="pullaltlist()">获取需要重新打包的模板信息</button>
+                        <button class="btn btn-danger " style="width: 120px" ng-mousedown="exportToExcel()">导出Excel表</button>
+                    </div>
+
+                </div>
+
+                <div class="space-6"></div>
+                <div class="table-responsive">
+                    <table id="sample-table-2" class="table table2excel table-striped table-bordered table-hover">
+                        <thead>
+                        <!--colspan="4"用于合并单元格-->
+                        <tr>
+                            <th>id</th>
+                            <th>模板类型</th>
+                            <th>项目</th>
+                            <th>分区</th>
+                            <th>包号</th>
+                            <th>构件号</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in formworkaltlist | filter:query">
+                            <td>{{x.id}}</td>
+                            <td>{{x.type}}</td>
+                            <td>{{ x.projectname}}</td>
+                            <td>{{x.partitionname}}</td>
+                            <td>{{x.packagename}}</td>
+                            <td>{{x.component_no}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </form>
+
+
+        </div><!--pagecontent-->
+    </div><!-- main-container-inner-->
+</div>

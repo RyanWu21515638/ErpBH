@@ -1,0 +1,93 @@
+<div class="main-container" ng-controller="productCtrl" ng-click="scrollon()">
+    <div class="main-container-inner">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a>生产管理</a>
+                </li>
+
+                <li>
+                    <a>打包管理</a>
+                </li>
+            </ul><!-- .breadcrumb -->
+
+        </div><!-- breadcrumbs-->
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    <!--<i class="icon-spinner icon-spin orange bigger-125"></i>-->
+                    <b>二局万达项目打包管理</b>
+                </h1>
+
+            </div><!-- /.page-header -->
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label no-padding-right"> 打包扫码区： </label>
+                    <div class="col-sm-3">
+                        <input id="scan" type="text" placeholder="打包前扫码区" ng-model="scanner.ad" style="width: 100%"
+                               ng-keydown="mykeyadd($event)"/><!--autofocus ng-blur="focus()"-->
+                    </div>
+                    <label class="col-sm-2 control-label no-padding-right">
+                        正在打包：{{groupdt[0].name}}区第{{groupdt[0].package_name}}包的{{groupdt[0].component_no}}构件{{package_number}}模板</label>
+                    <label class="col-sm-1 control-label no-padding-right"> </label>
+                    <label id="label1"></label>
+
+                    <label class="no-padding-right" id="label2"></label>
+                    <button id="clearformwork" class="btn btn-primary pull-right" ng-mousedown="clearformwork()">清空三维图
+                    </button>
+                    <button id="btnpackage" class="btn btn-danger pull-right" ng-mousedown="ensurepackage()">确认打包
+                    </button>
+
+                </div><!--form-group-->
+                <div class="space-6"></div>
+            </form>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <table id="table1" class="table table-striped table-bordered table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th colspan="5" bgcolor="white">
+                                <h4 align="center"><b>设计&打包比对清单</b></h4>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>序号</th>
+                            <th>模板名称</th>
+                            <th>模板类型</th>
+                            <th>已扫码</th>
+                            <th class="center-block">
+                                <button class="btn-danger" ng-click="reprint()">补印
+                            </button>
+                                <input type="checkbox" ng-click="reprintall()">
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in groupdt | filter:query" ng-click="select(x.id)">
+                            <td>{{$index+1}}</td>
+                            <td>{{ x.number }}</td>
+                            <td>{{ x.type }}</td>
+                            <td>
+                                <span ng-if="x.isscanned=='1'" class="label label-sm label-warning">已扫描</span>
+                                <span ng-if="x.isscanned=='0'" class="label label-sm label-light">未扫描</span></td>
+                            <td class="center"><input type="checkbox" ng-checked="reprintchosen[x.id]"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-sm-2 pull-right" style="visibility: hidden">
+                        <div style="width: 0;height: 0;" id="qrcode2"></div>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <iframe id="iframe2" name="viewer2" height="650" width="100%"
+                            src="/rlerp/Application/Viewer/View/index.html"></iframe>
+                </div>
+                <div id="frame">
+                </div>
+            </div>
+        </div><!--pagecontent-->
+    </div><!-- main-container-inner-->
+
+</div>

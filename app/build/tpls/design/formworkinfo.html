@@ -1,0 +1,129 @@
+<!--<style>
+    td {
+        word-break: break-all;
+        width: 50px;
+    }
+</style>-->
+<div class="main-container">
+    <div class="main-container-inner">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">设计管理</a>
+                </li>
+                <li class="active">模板信息管理</li>
+            </ul><!-- .breadcrumb -->
+
+        </div><!-- breadcrumbs-->
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    模板信息查询
+                </h1>
+            </div><!-- /.page-header -->
+            <form class="form-horizontal" role="form" ng-controller="formworkController">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right">项目编号：</label>
+                    <select class="col-sm-2" ng-model="prjid" ng-change="change1(prjid)">
+                        <option value="">&nbsp;</option>
+                        <option value={{x.id}} ng-repeat="x in prj">{{x.id}}</option>
+                    </select>
+                    <label class="col-sm-2 control-label no-padding-right">区域：</label>
+                    <select class="col-sm-2" ng-model="partion" ng-change="change2(partion)">
+                        <option value="">&nbsp;</option>
+                        <option value={{x.id}} ng-repeat="x in part">{{x.name}}</option>
+                    </select>
+                    <label class="col-sm-2 control-label no-padding-right">包：</label>
+                    <select class="col-sm-2" ng-model="pckage" ng-change="change3(pckage)">
+                        <option value="">&nbsp;</option>
+                        <option value={{x.id}} ng-repeat="x in pack">{{x.name}}</option>
+                    </select>
+                </div>
+
+
+                <div class="space-6"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!-- <iframe name="viewer" height="650" width="100%"
+                                 src="/rlerp/Application/Viewer/View/index.html"></iframe>-->
+                    </div>
+
+                    <div class="table-responsive col-sm-6" style="visibility:hidden;" id="div1">
+                        <table id="table1" class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>二维码</th>
+                                <th>序号</th>
+                                <th>模板名称</th>
+                                <th class="hidden-480">模板类型</th>
+                                <th class="hidden-480">模板长度</th>
+                                <th class="hidden-480">模板宽度</th>
+                                <th class="hidden-480">模板数量</th>
+                                <th class="hidden-480">齐数打钩</th>
+                                <th class="hidden-480">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in group" ng-click="detail(x.id,x.number)" draggable="true">
+                                <td width="20"><img xpopover
+                                                    height="20"
+                                                    width="20"
+                                                    src="/rlerp/Public/image/2dcode.jpg"
+                                                    data-trigger="hover"
+                                                    data-content='<img src="http://2d-code.cn/2dcode/api.php?key=c_7d978Vz8nc0nUIylg8nAv2SzKWcmloiQK5BLXIO1Dg&text=模板编号:+{{x.id}};模板类型:+{{x.type}};模板名称:+{{x.number}}&size=160">'
+                                                    title="2d-code"></img></td>
+                                <td width="50">{{x.id}}</td>
+                                <td width="180">{{x.number}}</td>
+                                <td width="120">{{x.type}}</td>
+                                <td width="120">{{x.length}}</td>
+                                <td width="120">{{x.width}}</td>
+                                <td>{{x.typecount}}</td>
+                                <td class="center">
+                                    <label>
+                                        <input type="checkbox" class="ace"/>
+                                        <span class="lbl"></span>
+                                <td></td>
+                                </label>
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                        <tm-pagination conf="paginationConf"></tm-pagination>
+                    </div>
+                </div>
+                <div class="table-responsive" style="visibility:hidden;" id="div2">
+                    <table id="table2" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>模板名称</th>
+
+                            <th class="hidden-480">矩阵</th>
+                            <th class="hidden-480">颜色</th>
+                            <th class="hidden-480">handle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in formdetail | filter:query">
+
+                            <td width="50">{{ x.id}}</td>
+                            <td width="120">{{ formnumber}}</td>
+                            <td>{{x.matrix}}</td>
+                            <td width="100">{{x.color}}</td>
+                            <td width="100">{{x.handle}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </form>
+
+
+        </div><!-- pagecontent -->
+    </div><!-- main-container-inner -->
+</div><!-- main-container -->
+
+<!-- inline scripts related to this page -->
+	

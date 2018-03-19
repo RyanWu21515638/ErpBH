@@ -1,0 +1,146 @@
+<div class="main-container">
+    <div class="main-container-inner">
+        <div class="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">系统管理</a>
+                </li>
+
+                <li>
+                    <a href="#">部门管理</a>
+                </li>
+                <li class="active">部门信息管理</li>
+            </ul><!-- .breadcrumb -->
+        </div>
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    <!--<i class="icon-spinner icon-spin orange bigger-125"></i>-->
+                    部门资料查询
+                </h1>
+            </div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">部门查询</label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="请输入要查询的部门编号或名称" style="width: 50%">
+                    </div>
+                    <div class="col-sm-3">
+                        <button class="btn btn-primary btn-sm right" data-toggle="modal" data-target="#modal-form" ng-click="reset()">
+                            添加部门信息
+                        </button>
+                    </div>
+                </div>
+                <div class="space-6"></div>
+                <div class="table-responsive">
+                    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <!--colspan="4"用于合并单元格-->
+                        <tr>
+                            <th class="center">
+                                <label>
+                                    <input type="checkbox" class="ace"/>
+                                    <span class="lbl"></span>
+                                </label>
+                            </th>
+                            <th >姓名</th>
+                            <th>邮件</th>
+                            <th class="hidden-480">权限</th>
+
+                            <th>
+                                <i class="icon-time bigger-110 hidden-480"></i>
+                                编号
+                            </th>
+
+                            <th class="hidden-480">Status</th>
+
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in names | filter:query">
+                            <td class="center">
+                                <label>
+                                    <input type="checkbox" class="ace"/>
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+
+                            <td>
+                                <span ng-if="!x.$editing" ng-click="x.$editing = false">{{ x.username}}</span>
+
+                                <input type="text" ng-model="x.username" ng-if="x.$editing"/>
+                            </td>
+                            <td>{{ x.email}}</td>
+                            <td class="hidden-480">{{x.usergroup}}</td>
+                            <td popover>{{x.userid}}</td>
+
+                            <td class="hidden-480" ng-model="x.status">
+                                <span ng-if="x.status=='1'" class="label label-sm label-warning">在职</span>
+                                <span ng-if="x.status=='0'" class="label label-sm label-light">离职</span>
+                            </td>
+
+                            <td>
+                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                    <a class="blue" ng-click="x.$editing = false">
+                                        <i class="icon-ok bigger-130"></i>
+                                    </a>
+
+                                    <a class="green" ng-click="x.$editing = true">
+                                        <i class="icon-pencil bigger-130"></i>
+                                    </a>
+
+                                    <a class="red" ng-click="delete(x.userid)">
+                                        <i class="icon-trash bigger-130"></i>
+                                    </a>
+                                </div>
+
+                                <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                    <div class="inline position-relative">
+                                        <button class="btn btn-minier btn-yellow dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <i class="icon-caret-down icon-only bigger-120"></i>
+                                        </button>
+
+                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                            <li>
+                                                <a class="tooltip-info" data-rel="tooltip" title="View">
+																				<span class="blue">
+																					<i class="icon-ok bigger-120"></i>
+
+																				</span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="tooltip-success" data-rel="tooltip" title="Edit">
+																				<span class="green">
+																					<i class="icon-pencil bigger-120"></i>
+																				</span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="tooltip-error" data-rel="tooltip" title="Delete">
+																				<span class="red">
+																					<i class="icon-trash bigger-120"></i>
+																				</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

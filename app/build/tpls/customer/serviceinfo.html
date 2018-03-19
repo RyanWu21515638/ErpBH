@@ -1,0 +1,39 @@
+<div class="main-container">
+    <div class="main-container-inner" ng-controller="UserCtrl">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a>客户服务</a>
+                </li>
+                <li>
+                    <a>现场验收</a>
+                </li>
+            </ul><!-- .breadcrumb -->
+
+        </div><!-- breadcrumbs-->
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    <!--<i class="icon-spinner icon-spin orange bigger-125"></i>-->
+                    现场验收
+                </h1>
+            </div><!-- /.page-header -->
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 现场扫码： </label>
+                    <div class="col-sm-6">
+                        <input type="text" id="form-field-1" placeholder="请扫码" ng-model="query" ng-blur="focus()" autofocus
+                               style="width: 50%"/>
+                    </div>
+                </div><!--form-group-->
+            </form>
+            <div>
+                <iframe id="iframe3" name="viewer3" width="100%" height="650" scrolling="yes"
+                        src="/rlerp/Application/Viewer/View/index.html"></iframe>
+            </div>
+
+
+        </div><!--pagecontent-->
+    </div><!-- main-container-inner-->
+</div>

@@ -1,0 +1,177 @@
+<div class="main-container" ng-controller="productCtrl" ng-click="scrollon()">
+
+    <div class="main-container-inner">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a>生产管理</a>
+                </li>
+
+                <li>
+                    <a>质检管理</a>
+                </li>
+            </ul><!-- .breadcrumb -->
+
+        </div><!-- breadcrumbs-->
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    <!--<i class="icon-spinner icon-spin orange bigger-125"></i>-->
+                    <b>二局万达项目质检管理</b>
+                </h1>
+            </div><!-- /.page-header -->
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-1 control-label no-padding-right">项目：</label>
+                    <div class="col-md-1">
+                        <select id="inputprj" style="width: 160%" ng-model="project" ng-change="change1(project)"
+                                ng-options="pr.id as pr.name for pr in prj" ng-disabled="!inputprj">
+                            <option value="">--请选择项目--</option>
+                        </select>
+
+                    </div>
+
+                    <label class="col-md-1 control-label no-padding-right">区域：</label>
+                    <div class="col-md-1">
+                        <select id="inputprt" style="width: 160%" ng-model="partion" ng-change="change2(partion)"
+                                ng-options="pt.id as pt.name for pt in part" ng-disabled="!inputprt">
+                            <option value=""></option>
+                        </select>
+
+                    </div>
+
+                    <label class="col-md-1 control-label no-padding-right">包：</label>
+                    <div class="col-md-1">
+                        <select id="inputpckage" style="width: 160%" ng-model="pckage" ng-change="change3(pckage)"
+                                ng-options="pk.id as pk.name for pk in pack" ng-disabled="!inputpckage">
+                            <option value="">-- 请选择包 --</option>
+                        </select>
+                    </div>
+
+                    <label class="col-md-1 control-label no-padding-right">构件：</label>
+                    <div class="col-md-1">
+                        <select id="inputgj" style="width: 130%" ng-model="grp" ng-change="change4(grp)"
+                                ng-options="gj.component_no as gj.component_no for gj in goujian"
+                                ng-disabled="!inputgj">
+                            <option value="">--请选择构件--</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button id="print" class="btn-primary" style="width: 98px" ng-mousedown="prn1_preview()">打印二维码
+                        </button>
+                        <button class="btn-danger" ng-click="printprtandpack()"> 分区/包二维码
+                            <i class="icon-qrcode"></i>
+                        </button>
+
+                        <div class="space-2"></div>
+                        <button class="btn-yellow" style="width: 98px" ng-mousedown="exportToExcel(groupdetailforexel[0].component_no)">导出Excel表</button>
+
+                        <button class="btn-danger" ng-mousedown="clearprint()">清空
+                            <i class="icon-qrcode"></i>
+                        </button>
+                    </div>
+
+                    <div class="col-md-2 pull-right">
+                        <div style="width: 0;height: 0;" id="qrcode"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-1 control-label no-padding-right"> 模板查询： </label>
+                    <div class="col-md-3">
+                        <input type="text" placeholder="请输入模板型号" ng-model="query" style="width: 115%"/>
+                        <!--<input id="scan" type="text" placeholder="扫码枪扫描" ng-model="scanner.a" autofocus
+                               ng-blur="focus()" style="width: 100%" ng-keydown="mykey($event)"/>-->
+                    </div>
+
+                    <label class="col-md-1 control-label no-padding-right">所选模板：</label>
+                    <label class="col-md-3" id="h2" style="font-size: larger"></label>
+                </div><!--form-group-->
+
+
+            </form>
+            <div class="space-24"></div>
+            <div class="row">
+                <div class="col-md-3">
+                    <table id="table1" class="table table-striped table-bordered table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>模板名称</th>
+                            <th>模板类型</th>
+                            <th>构件名</th>
+                            <th>已打印</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in groupdetail | filter:query" ng-click="show(x.id,x.number)">
+                            <td>{{$index+1}}</td>
+                            <td>{{x.number}}</td>
+                            <td>{{x.type}}</td>
+                            <td>{{ x.component_no }}</td>
+                            <td>
+                                <span ng-if="x.isprinted=='1'" class="label label-sm label-warning">已打印</span>
+                                <span ng-if="x.isprinted=='0'" class="label label-sm label-light">未打印</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table id="table2" class="table table2excel table-striped table-bordered table-hover table-condensed"
+                           style="visibility: hidden;display: none">
+                        <thead>
+                        <tr>
+                            <th colspan="8">
+                                <h1>{{groupdetailforexel[0].component_no}}清单</h1>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>序号</th>
+                            <th>模板名称</th>
+                            <th>模板类型</th>
+                            <th>数量</th>
+                            <th>区域</th>
+                            <th>包号</th>
+                            <th>构件名</th>
+                            <th>备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in groupdetailforexel | filter:query" ng-click="show(x.id,x.number)">
+                            <td>{{$index+1}}</td>
+                            <td>{{x.number}}</td>
+                            <td>{{x.type}}</td>
+                            <td>{{x.typecount}}</td>
+                            <td>{{x.name}}</td>
+                            <td>{{x.package_name}}</td>
+                            <td>{{x.component_no }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>统计</td>
+                            <td></td>
+                            <td></td>
+                            <td>{{exelsum}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td ></td>
+                        </tr>
+                        <tr>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row col-md-9">
+                    <iframe id="iframe1" name="viewer1" width="100%" height="650" scrolling="yes"
+                            src="/rlerp/Application/Viewer/View/index.html"></iframe>
+                </div>
+                <div id="example1"></div>
+            </div>
+        </div><!--pagecontent-->
+    </div><!-- main-container-inner-->
+</div>

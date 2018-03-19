@@ -1,0 +1,88 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="formController">
+    <div class="navbar-container" id="navbar-container">
+
+        <div class="navbar-header col-lg-3 col-md-4" style="">
+            <a class="navbar-brand" ui-sref="#"><i>生产流程管理系统</i></a>
+        </div>
+        <div class="col-lg-8 col-md-6">
+            <ul class="nav ace-nav">
+                <li class="grey">
+                    <a ui-sref="main.sysmng.userinfo">
+                        用户管理</a>
+                </li>
+                <li class="grey">
+                    <a ui-sref="main.productmng.producehighchart">生产看板</a>
+                </li>
+                <li class="grey">
+                    <a ui-sref="main.productmng.taskallocated">生产计划</a>
+                </li>
+                <li class="grey">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">生产工序</a>
+                    <ul class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a ui-sref="main.productmng.cutinfo">开料</a>
+                        </li>
+                        <li>
+                            <a ui-sref="main.productmng.punchinginfo">冲孔</a>
+                        </li>
+                        <li>
+                            <a ui-sref="main.productmng.jointinginfo">焊接</a>
+                        </li>
+                        <li>
+                            <a ui-sref="main.productmng.package">分料</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="grey">
+                    <a ui-sref="main.productmng.designmng">设计管理</a>
+                </li>
+                <!--<li style="width:auto;text-align:right">
+                    <a ui-sref="main.productmng.punchinginfo">冲孔管理</a>
+                </li>
+                <li style="width:auto;text-align:right">
+                    <a ui-sref="main.productmng.jointinginfo">焊接管理</a>
+                </li>-->
+                <!--<li class="grey">
+                    <a ui-sref="main.productmng.package">分 料</a>
+                </li>-->
+            </ul>
+        </div>
+        <div class="col-lg-1 col-md-1 pull-right">
+            <ul class="nav ace-nav">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="">
+                        <img class="nav-user-photo" src="/rlerp/Public/userfile/{{storage}}.jpg"
+                             alt="Photo"/>
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <!--<li>
+                            <a ng-click="cook()">
+                                <i class="icon-cog"></i>
+                                设置
+                            </a>
+                        </li>
+-->
+                        <li>
+                            <a ui-sref="main.sysmng.usersetting" >
+                                <i class="icon-user"></i>
+                                修改密码
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a ui-sref="index" ng-click="logout()">
+                                <i class="icon-off"></i>
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
